@@ -11,6 +11,7 @@ if (existsSync('./config.yml')) {
 
 export default {
   port: config?.port || 3000,
+  jwtSecretKey: '123456abc' || config.jwtSecretKey,
   mysql: {
     host: config?.mysql?.host,
     port: config?.mysql?.port,

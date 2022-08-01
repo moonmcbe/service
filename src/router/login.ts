@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { query } from '../utils/db'
 import to from 'await-to-js'
+import token from '../utils/token'
 
 const router = Router()
 
@@ -14,7 +15,7 @@ router.post('/', async (req, res) => {
   let err,
     results
     // 查验证码
-  ;[err, results] = await to(query(sql, [code, qq]))
+    ;[err, results] = await to(query(sql, [code, qq]))
   if (err) {
     return res.send({ code: 500 })
   }
@@ -33,7 +34,8 @@ router.post('/', async (req, res) => {
   if (results.length < 1) {
     return res.send({ code: 403, msg: '暂未开放注册' })
   }
-  res.send({ code: 200 })
+
+  res.send({ code: 200, token: token({ ...results[0] }) })
 })
 
 export default router
