@@ -4,9 +4,14 @@ const router = Router()
 
 router.post('/', (req, res) => {
   const user = req.user as any
-  console.log(user)
 
-  res.send()
+  const { id, username, permissions, status, qq } = user
+
+  res.send({
+    code: 200, data: {
+      id, username, permissions, status, qq
+    }
+  })
 })
 
 export default router
