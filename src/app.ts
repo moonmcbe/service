@@ -9,6 +9,8 @@ import JWTUnless from './utils/JWTUnless'
 
 const app = express()
 
+app.use(cors())
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -35,8 +37,6 @@ app.use(
     // 未知错误...
   }
 )
-
-app.use(cors())
 
 app.use('/api', router)
 
