@@ -25,9 +25,10 @@ router.post('/set', async (req, res) => {
   if (results.length < 1) {
     return res.send({ code: 403, msg: '未查询到信息' })
   }
+  const name = results[0].name
   if (allow) {
     // 加白名
-    console.log((config.mcsm.addWhitelist as string).replace('{id}', results[0].name))
+    console.log((config.mcsm.addWhitelist as string).replace('{id}', name))
 
     const { data: res } = await execute(
       (config.mcsm.addWhitelist as string).replace('{id}', id)
@@ -35,6 +36,14 @@ router.post('/set', async (req, res) => {
     if (res.status != 200) {
       console.error(res)
       return res.send({ code: 500, msg: '白名单添加失败' })
+    }
+    // 添加玩家
+    [err, results] = await to(query('insert into players set ?', {
+      name,
+      date: new Date()
+    }))
+    if (err) {
+      return res.send({ code: 500, msg: 'players数据库添加失败' })
     }
   }
   // 更新数据库
