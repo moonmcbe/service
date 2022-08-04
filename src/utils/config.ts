@@ -12,6 +12,13 @@ if (existsSync('./config.yml')) {
 export default {
   port: config?.port || 3000,
   jwtSecretKey: '123456abc' || config.jwtSecretKey,
+  mcsm: {
+    url: config.mcsm.url,
+    apiKey: config.mcsm.apiKey,
+    name: config.mcsm.name,
+    addWhitelist: config.mcsm.addWhitelist || 'whitelist add {id}',
+    removeWhitelist: config.mcsm.removeWhitelist || 'whitelist remove {id}'
+  },
   mysql: {
     host: config?.mysql?.host,
     port: config?.mysql?.port,
