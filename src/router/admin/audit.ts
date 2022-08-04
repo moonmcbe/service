@@ -3,6 +3,7 @@ import { query } from '../../utils/db'
 import to from 'await-to-js'
 import execute from '../../mcsmApi/execute'
 import config from '../../utils/config'
+import sqlLog from '../../utils/sqlLog'
 
 const router = Router()
 
@@ -39,6 +40,7 @@ router.post('/set', async (req, res) => {
     }
     // 添加玩家
     [err, results] = await to(query('insert into players set ?', {
+      id: Math.random() * 100000000,
       name,
       date: new Date()
     }))
@@ -46,6 +48,7 @@ router.post('/set', async (req, res) => {
       return res.send({ code: 500, msg: 'players数据库添加失败' })
     }
   }
+  sqlLog(user.id, `审核结果:${allow} 原因:${cause}`, id);
   // 更新数据库
   [err, results] = await to(query('update audit set ? where id=?', [{
     status: allow ? 2 : 3,

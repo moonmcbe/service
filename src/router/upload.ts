@@ -2,6 +2,7 @@ import { Router } from 'express'
 import dayjs from 'dayjs'
 import multer from 'multer'
 import putObject from '../utils/putObject'
+import sqlLog from '../utils/sqlLog'
 
 const router = Router()
 
@@ -21,6 +22,7 @@ const upload = multer({
 }).single('file')
 
 router.post('/', async (req, res) => {
+
   upload(req, res, async () => {
     if (req.file?.buffer == undefined) return res.send({ code: 403 })
     const fileNameData = dayjs().format('YYYYMMDDHHmmss')
@@ -34,6 +36,8 @@ router.post('/', async (req, res) => {
     if (data.statusCode != 200) {
       return res.send({ code: 500 })
     }
+
+    sqlLog(0, `上传图片 ${fileName}`, 0)
 
     res.send({ code: 200, fileName, Location: data.Location })
   })

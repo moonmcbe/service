@@ -14,9 +14,9 @@ router.post('/', async (req, res) => {
   let err,
     results
     // 通过id查信息
-  ;[err, results] = await to(
-    query('select * from audit where id=? and status=0', id)
-  )
+    ;[err, results] = await to(
+      query('select * from audit where id=? and status=0', id)
+    )
   if (err) {
     return res.send({ code: 500 })
   }
