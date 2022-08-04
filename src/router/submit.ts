@@ -32,7 +32,8 @@ router.post('/', async (req, res) => {
       name,
       bili_username: biliUsername,
       bili_uid: biliUid,
-      upload
+      upload,
+      date: new Date()
     })
   )
   sqlLog(qq, `申请白名单${JSON.stringify({
@@ -40,7 +41,8 @@ router.post('/', async (req, res) => {
     name,
     bili_username: biliUsername,
     bili_uid: biliUid,
-    upload
+    upload,
+    date: new Date()
   })}`, results.insertId)
   if (err) {
     return res.send({ coe: 500 })

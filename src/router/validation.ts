@@ -20,11 +20,14 @@ router.post('/', async (req, res) => {
   if (err) {
     return res.send({ code: 500 })
   }
+
+  const auditId = results[0]?.id
+  const qq = results[0]?.qq
   if (results.length < 1) {
     return res.send({ code: 403, msg: '验证码错误' })
   }
   // 查验证码
-  ;[err, results] = await to(query(sql, [code, results[0].qq]))
+  ;[err, results] = await to(query(sql, [code, qq]))
   if (err) {
     return res.send({ code: 500 })
   }
@@ -33,7 +36,7 @@ router.post('/', async (req, res) => {
   }
   // 更新审核状态
   ;[err] = await to(
-    query('update audit set status=1 where id=?;', results[0].id)
+    query('update audit set status=1 where id=?;', auditId)
   )
   if (err) {
     return res.send({ code: 500 })

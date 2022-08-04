@@ -8,7 +8,7 @@ import sqlLog from '../../utils/sqlLog'
 const router = Router()
 
 router.post('/get', async (req, res) => {
-  const [err, results] = await to(query('select * from audit where status=1 or status=0;'))
+  const [err, results] = await to(query('select * from audit where status=1;'))
 
   if (err) {
     return res.send({ code: 500 })
