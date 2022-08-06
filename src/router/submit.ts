@@ -24,8 +24,21 @@ router.post('/', async (req, res) => {
   ) {
     return res.send({ status: 403 })
   }
+  let err, results
+  [err, results] = await to(
+    query(
+      'select * from players where name=?;',
+      name
+    )
+  )
+  if (err) {
+    return res.send({ code: 500 })
+  }
+  if (results.length >= 1) {
+    return res.send({ code: 403, msg: '该玩家申请过白名单' })
+  }
 
-  const [err, results] = await to(
+  [err, results] = await to(
     query('insert into audit set ?', {
       id: Math.floor(Math.random() * 100000000),
       qq,
