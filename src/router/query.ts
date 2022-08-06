@@ -7,7 +7,7 @@ const router = Router()
 router.post('/', async (req, res) => {
   const { name, qq } = req.body
   const [err, results] = await to(
-    query('select name, qq, date, id from users where name=? or qq=?', [
+    query('select name, qq, date, id from players where name=? or qq=?', [
       name,
       qq
     ])

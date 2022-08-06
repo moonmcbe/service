@@ -27,6 +27,7 @@ router.post('/set', async (req, res) => {
     return res.send({ code: 403, msg: '未查询到信息' })
   }
   const name = results[0].name
+  const qq = results[0].qq
   if (allow) {
     // 加白名
     console.log((config.mcsm.addWhitelist as string).replace('{id}', name))
@@ -42,6 +43,7 @@ router.post('/set', async (req, res) => {
     [err, results] = await to(query('insert into players set ?', {
       id: Math.random() * 100000000,
       name,
+      qq,
       date: new Date()
     }))
     if (err) {
