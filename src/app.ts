@@ -14,6 +14,19 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// 中间件记录日志
+app.use('*', (req: any, res, next) => {
+  // 用于记录特定时间的日志输出
+
+  try {
+    req.userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+  } catch (e) {
+    console.log(e)
+  }
+  next()
+  console.log(`${new Date()} ip:${req.userIp}  请求:${req.path}  user-agent:${req.headers['user-agent']}`)
+})
+
 app.use(
   expressJWT({ secret: config.jwtSecretKey, algorithms: ['HS256'] }).unless({
     path: JWTUnless
@@ -37,19 +50,6 @@ app.use(
     // 未知错误...
   }
 )
-
-// 中间件记录日志
-app.use('*', (req: any, res, next) => {
-  // 用于记录特定时间的日志输出
-
-  try {
-    req.userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-  } catch (e) {
-    console.log(e)
-  }
-  next()
-  console.log(`${new Date()} ip:${req.userIp}  请求:${req.path}  user-agent:${req.headers['user-agent']}`)
-})
 
 app.use(config.baseUrl, router)
 
