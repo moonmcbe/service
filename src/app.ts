@@ -51,7 +51,7 @@ app.use('*', (req: any, res, next) => {
   console.log(`${new Date()} ip:${req.userIp}  请求:${req.path}  user-agent:${req.headers['user-agent']}`)
 })
 
-app.use('/api', router)
+app.use(config.baseUrl, router)
 
 app.listen(config.port, () => {
   console.log(`http://localhost:${config.port}`)

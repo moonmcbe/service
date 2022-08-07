@@ -11,6 +11,7 @@ if (existsSync('./config.yml')) {
 
 export default {
   port: config?.port || 3000,
+  baseUrl: config.baseUrl || '/api',
   jwtSecretKey: '123456abc' || config.jwtSecretKey,
   mcsm: {
     url: config.mcsm.url,
