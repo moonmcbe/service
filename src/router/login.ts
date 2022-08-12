@@ -11,7 +11,7 @@ select * from
 where
   date>=DATE_SUB(NOW(),INTERVAL 5 MINUTE) and code=? and qq=? and status=0;`
 router.post('/', async (req, res) => {
-  const { qq, code } = req.body
+  const { qq, code, keepLogin } = req.body
   let err,
     results
     // 查验证码
@@ -35,7 +35,9 @@ router.post('/', async (req, res) => {
     return res.send({ code: 403, msg: '暂未开放注册' })
   }
 
-  res.send({ code: 200, token: token({ ...results[0] }) })
+  res.send({
+    code: 200, token: token({ ...results[0] }, keepLogin ? '7d' : '24h')
+  })
 })
 
 export default router
