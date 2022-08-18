@@ -6,6 +6,7 @@ import cors from 'cors'
 import './bot/getVerificationCode'
 import expressJWT from 'express-jwt'
 import JWTUnless from './utils/JWTUnless'
+import './service/check'
 
 const app = express()
 

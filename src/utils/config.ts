@@ -31,7 +31,11 @@ export default {
     host: config.bot.host,
     port: config.bot.port,
     verifyKey: config.bot.verifyKey,
-    qq: config.bot.qq
+    qq: config.bot.qq,
+    admin_group: config.bot.admin_group
+  },
+  cron: {
+    check: config.cron?.check
   },
   SecretId: config?.SecretId,
   SecretKey: config?.SecretKey,

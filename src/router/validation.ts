@@ -1,8 +1,26 @@
 import { Router } from 'express'
 import { query } from '../utils/db'
 import to from 'await-to-js'
+import { send } from '../utils/ws'
+import config from '../utils/config'
 
 const router = Router()
+
+const sendMessage = (text: string) => {
+  send({
+    'syncId': 123, // 消息同步的字段
+    'command': 'sendGroupMessage', // 命令字
+    'content': {
+      group: config.bot.admin_group,
+      messageChain: [
+        {
+          type: 'Plain',
+          text
+        }
+      ]
+    }
+  })
+}
 
 const sql = `
 select * from
@@ -23,6 +41,7 @@ router.post('/', async (req, res) => {
 
   const auditId = results[0]?.id
   const qq = results[0]?.qq
+  const name = results[0]?.name
   if (results.length < 1) {
     return res.send({ code: 403, msg: '验证码错误' })
   }
@@ -50,6 +69,9 @@ router.post('/', async (req, res) => {
   }
 
   res.send({ code: 200 })
+
+  // qq通知
+  sendMessage(`玩家${name} ${qq} 申请白名单`)
 })
 
 router.post('/check', async (req, res) => {
