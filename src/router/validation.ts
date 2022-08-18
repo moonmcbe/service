@@ -6,7 +6,7 @@ import config from '../utils/config'
 
 const router = Router()
 
-const sendMessage = (text: string) => {
+const sendMessage = (text: string, url: string) => {
   send({
     'syncId': 123, // 消息同步的字段
     'command': 'sendGroupMessage', // 命令字
@@ -16,6 +16,10 @@ const sendMessage = (text: string) => {
         {
           type: 'Plain',
           text
+        },
+        {
+          type: 'Image',
+          url
         }
       ]
     }
@@ -42,6 +46,8 @@ router.post('/', async (req, res) => {
   const auditId = results[0]?.id
   const qq = results[0]?.qq
   const name = results[0]?.name
+  const image = results[0]?.upload
+
   if (results.length < 1) {
     return res.send({ code: 403, msg: '验证码错误' })
   }
@@ -71,7 +77,7 @@ router.post('/', async (req, res) => {
   res.send({ code: 200 })
 
   // qq通知
-  sendMessage(`玩家${name} ${qq} 申请白名单`)
+  sendMessage(`玩家${name} ${qq} 申请白名单`, 'https:' + image)
 })
 
 router.post('/check', async (req, res) => {
