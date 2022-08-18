@@ -10,6 +10,7 @@ if (existsSync('./config.yml')) {
 }
 
 export default {
+  debug: config.debug,
   port: config?.port || 3000,
   baseUrl: config.baseUrl || '/api',
   jwtSecretKey: '123456abc' || config.jwtSecretKey,

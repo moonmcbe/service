@@ -25,4 +25,10 @@ const message = (data: (data: data) => void) => {
   })
 }
 
+if (config.debug) {
+  message((data) => {
+    console.log(JSON.stringify(data))
+  })
+}
+
 export { send, ws, message }

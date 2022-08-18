@@ -8,6 +8,8 @@ import expressJWT from 'express-jwt'
 import JWTUnless from './utils/JWTUnless'
 import './service/check'
 
+console.log('debug', config.debug)
+
 const app = express()
 
 app.use(cors())
