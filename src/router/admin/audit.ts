@@ -33,8 +33,9 @@ router.post('/set', async (req, res) => {
     console.log((config.mcsm.addWhitelist as string).replace('{id}', name))
 
     const { data: res } = await execute(
-      (config.mcsm.addWhitelist as string).replace('{id}', id)
+      (config.mcsm.addWhitelist as string).replace('{id}', name)
     )
+    console.log(res)
     if (res.status != 200) {
       console.error(res)
       return res.send({ code: 500, msg: '白名单添加失败' })
