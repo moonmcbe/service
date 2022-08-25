@@ -6,6 +6,10 @@ const ws = new WebSocket(
   `ws://${config.bot.host}:${config.bot.port}/all?verifyKey=${config.bot.verifyKey}&qq=${config.bot.qq}`
 )
 
+ws.onerror = (e) => {
+  console.error('ws error', e)
+}
+
 const send = (json: any) => {
   if (typeof json == 'object') {
     return ws.send(JSON.stringify(json))
