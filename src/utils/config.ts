@@ -38,7 +38,8 @@ export default {
     port: config.bot.port,
     verifyKey: config.bot.verifyKey,
     qq: config.bot.qq,
-    admin_group: config.bot.admin_group
+    admin_group: config.bot.admin_group,
+    group: config.bot.group
   },
   cron: {
     check: config.cron?.check

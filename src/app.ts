@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import router from './router'
 import cors from 'cors'
 import './bot/getVerificationCode'
+import './bot/groupMessage'
 import expressJWT from 'express-jwt'
 import JWTUnless from './utils/JWTUnless'
 import './service/check'
@@ -27,7 +28,11 @@ app.use('*', (req: any, res, next) => {
     console.log(e)
   }
   next()
-  console.log(`${new Date()} ip:${req.userIp}  请求:${req.path}  user-agent:${req.headers['user-agent']}`)
+  console.log(
+    `${new Date()} ip:${req.userIp}  请求:${req.path}  user-agent:${
+      req.headers['user-agent']
+    }`
+  )
 })
 
 app.use(
