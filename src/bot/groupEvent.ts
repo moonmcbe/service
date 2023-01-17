@@ -84,13 +84,12 @@ groupMessage(async (data: event) => {
       ])
     }
     // 改数据库
+    let status = 5
+    if (results[0].status == 2 || results[0].status == 3) {
+      status = 3
+    }
     await to(
-      query('update players set ? where id=?', [
-        {
-          status: 5
-        },
-        results[0].id
-      ])
+      query('update players set ? where id=?', [{ status }, results[0].id])
     )
     sendGroupMessage(config.bot.group, [
       {
