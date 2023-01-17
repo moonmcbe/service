@@ -1,0 +1,36 @@
+debug: false
+port: 3000
+baseUrl: '/api'
+mcsm:
+  url: 'http://localhost:23333'
+  apiKey: a19a9c68161e48eca3b4d6eb1c4d30e8
+  # 守护进程下的实例 UUID
+  uuid: 38624af3a31d4664b95012154831dd60
+  # 守护进程 UUID
+  remote_uuid: 0cf1c34b46605ed680b8a57c2486c674
+  # 添加/删除白名单的指令，执行时将替换 {id} 为玩家id
+  # java版可将引号去除
+  addWhitelist: allowlist add "{id}"
+  removeWhitelist: allowlist remove "{id}"
+mysql:
+  host: 'localhost'
+  port: 3306
+  user: 'admin'
+  password: 'admin123'
+  database: 'mc_wl'
+bot:
+  host: 'localhost'
+  port: 8080
+  verifyKey: OL8IG1E541AW24LF1B
+  # 机器人qq
+  qq: 2017295059
+  # 管理员群聊，用于发送审核通知消息
+  admin_group: 726155337
+# 审核超时检查周期
+cron:
+  check: '0 */12 * * *'
+# 腾讯云cos api内容
+SecretId: 'xxxxxx'
+SecretKey: 'xxxxxx'
+Bucket: 'xxxx-xxxxxxxxx'
+Region: 'ap-beijing'
