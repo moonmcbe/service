@@ -4,6 +4,8 @@ node_modules
 *test*
 /logs
 /data
+.history
+config.dev.yml
 
 config.yml
 
