@@ -22,7 +22,6 @@ groupMessage((data) => {
     data?.data?.sender?.group?.id == config.bot.group
   ) {
     // 群消息
-    console.log('群消息', data)
     data?.data?.messageChain?.forEach((e) => {
       if (e.text?.trim() == '获取验证码') {
         send({
