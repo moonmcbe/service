@@ -9,6 +9,10 @@ if (existsSync('./config.yml')) {
   console.log('请创建config.yml')
 }
 
+if(config.debug) {
+  config = parse(readFileSync('./config.dev.yml', 'utf8'))
+}
+
 export default {
   debug: config.debug,
   port: config?.port || 3000,
@@ -17,7 +21,8 @@ export default {
   mcsm: {
     url: config.mcsm.url,
     apiKey: config.mcsm.apiKey,
-    name: config.mcsm.name,
+    uuid: config.mcsm.uuid,
+    remote_uuid: config.mcsm.remote_uuid,
     addWhitelist: config.mcsm.addWhitelist || 'whitelist add {id}',
     removeWhitelist: config.mcsm.removeWhitelist || 'whitelist remove {id}'
   },
