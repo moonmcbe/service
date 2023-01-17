@@ -1,15 +1,15 @@
 export default interface data {
   syncId: string
-  data: Data
+  data?: Data
 }
 
-interface Data {
-  type: string
+export interface Data {
+  type?: string
   messageChain: MessageChain[]
   sender: Sender
 }
 
-interface Sender {
+export interface Sender {
   id: number
   memberName: string
   specialTitle: string
@@ -22,13 +22,13 @@ interface Sender {
   remark: string
 }
 
-interface Group {
+export interface Group {
   id: number
   name: string
   permission: string
 }
 
-interface MessageChain {
+export interface MessageChain {
   type: string
   id?: number
   time?: number
