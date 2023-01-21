@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
   }
   // 封禁记录
   if (newStatus == 2 || newStatus == 3) {
-    ;[err, results] = await to(query('select * ban_log where id=?', id))
+    ;[err, results] = await to(query('select * from ban_log where id=?', id))
     if (err) {
       return { code: 500, msg: '查询ban_log数据出错' }
     }
