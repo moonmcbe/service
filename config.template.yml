@@ -12,6 +12,14 @@ mcsm:
   # java版可将引号去除
   addWhitelist: allowlist add "{id}"
   removeWhitelist: allowlist remove "{id}"
+smtp:
+  host: smtp.ym.163.com
+  port: 25
+  secure: false
+  from: <mail>mail@mail.mail
+  auth:
+    user: mail@mail.mail
+    pass: admin123
 mysql:
   host: 'localhost'
   port: 3306

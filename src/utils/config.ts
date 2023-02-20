@@ -9,7 +9,7 @@ if (existsSync('./config.yml')) {
   console.log('请创建config.yml')
 }
 
-if(config.debug) {
+if (config.debug) {
   config = parse(readFileSync('./config.dev.yml', 'utf8'))
 }
 
@@ -25,6 +25,16 @@ export default {
     remote_uuid: config.mcsm.remote_uuid,
     addWhitelist: config.mcsm.addWhitelist || 'whitelist add {id}',
     removeWhitelist: config.mcsm.removeWhitelist || 'whitelist remove {id}'
+  },
+  smtp: {
+    host: config.smtp.host,
+    port: config.smtp.port,
+    secure: config.smtp.secure,
+    from: config.smtp.from,
+    auth: {
+      user: config.smtp.auth.user,
+      pass: config.smtp.auth.pass
+    }
   },
   mysql: {
     host: config?.mysql?.host,

@@ -3,6 +3,7 @@ import { query } from '../utils/db'
 import to from 'await-to-js'
 import { send } from '../utils/ws'
 import config from '../utils/config'
+import { sendSubmitMail } from '../utils/email'
 
 const router = Router()
 
@@ -36,9 +37,9 @@ router.post('/', async (req, res) => {
   let err,
     results
     // 通过id查信息
-    ;[err, results] = await to(
-      query('select * from audit where id=? and status=0', id)
-    )
+  ;[err, results] = await to(
+    query('select * from audit where id=? and status=0', id)
+  )
   if (err) {
     return res.send({ code: 500 })
   }
@@ -47,6 +48,7 @@ router.post('/', async (req, res) => {
   const qq = results[0]?.qq
   const name = results[0]?.name
   const image = results[0]?.upload
+  const email = results[0]?.email
 
   if (results.length < 1) {
     return res.send({ code: 403, msg: '验证码错误' })
@@ -60,9 +62,7 @@ router.post('/', async (req, res) => {
     return res.send({ code: 403, msg: '验证码错误' })
   }
   // 更新审核状态
-  ;[err] = await to(
-    query('update audit set status=1 where id=?;', auditId)
-  )
+  ;[err] = await to(query('update audit set status=1 where id=?;', auditId))
   if (err) {
     return res.send({ code: 500 })
   }
@@ -76,7 +76,12 @@ router.post('/', async (req, res) => {
 
   res.send({ code: 200 })
 
-  // qq通知
+  // 邮件通知玩家
+  console.log(email)
+  email &&
+    sendSubmitMail(email, name, `https://moon.mcxing.cn/check/${auditId}`)
+
+  // qq管理群通知
   sendMessage(`玩家${name} ${qq} 申请白名单`, 'https:' + image)
 })
 
