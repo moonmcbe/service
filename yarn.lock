@@ -2149,6 +2149,13 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
+typescript-mirai-api-http@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/typescript-mirai-api-http/-/typescript-mirai-api-http-1.0.6.tgz#3a71cd24807a131ba8241be055a36bbdfe71b8d2"
+  integrity sha512-7U4j4lWOCMWJhZecEKdvTZC/Lu0xZ/38qM0i3Q50nv2iK2nYHigceQ5lLRL0fV2g0Tz4LFKr51u50KkwuzBY4A==
+  dependencies:
+    ws "^8.12.0"
+
 typescript@^4.7.2:
   version "4.7.4"
   resolved "https://registry.npmmirror.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
@@ -2226,6 +2233,11 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
+
+ws@^8.12.0:
+  version "8.12.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.1.tgz#c51e583d79140b5e42e39be48c934131942d4a8f"
+  integrity sha512-1qo+M9Ba+xNhPB+YTWUlK6M17brTut5EXbcBaMRN5pH5dFrXz7lzz1ChFSUq3bOUl8yEvSenhHmYUNJxFzdJew==
 
 ws@^8.8.1:
   version "8.8.1"
