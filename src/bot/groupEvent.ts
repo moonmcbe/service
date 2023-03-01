@@ -38,6 +38,21 @@ groupMessage((data) => {
           }
         })
       }
+      if (e.text.trim() == 'ip' || e.text.trim() == '白名单') {
+        send({
+          'syncId': 123, // 消息同步的字段
+          'command': 'sendGroupMessage', // 命令字
+          'content': {
+            group: config.bot.group,
+            messageChain: [
+              {
+                type: 'Plain',
+                text: 'ip、端口、白名单申请 等问题 请看公告！'
+              }
+            ]
+          }
+        })
+      }
     })
   }
 })
