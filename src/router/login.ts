@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
   let err,
     results
     // 查验证码
-    ;[err, results] = await to(query(sql, [code, qq]))
+  ;[err, results] = await to(query(sql, [code, qq]))
   if (err) {
     return res.send({ code: 500 })
   }
@@ -36,7 +36,31 @@ router.post('/', async (req, res) => {
   }
 
   res.send({
-    code: 200, token: token({ ...results[0] }, keepLogin ? '7d' : '24h')
+    code: 200,
+    token: token({ ...results[0] }, keepLogin ? '7d' : '24h')
+  })
+})
+
+router.post('/usePassword', async (req, res) => {
+  const { qq, password, keepLogin } = req.body
+
+  // 获取账号数据
+  const [err, results] = await to(query('select * from users where qq=?;', qq))
+  if (err) {
+    return res.send({ code: 403 })
+  }
+
+  if (results.length != 1) {
+    return res.send({ code: 403 })
+  }
+
+  if (results[0].password !== password) {
+    return res.send({ code: 403 })
+  }
+
+  res.send({
+    code: 200,
+    token: token({ ...results[0], password: null }, keepLogin ? '3d' : '12h')
   })
 })
 

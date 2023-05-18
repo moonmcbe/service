@@ -46,19 +46,22 @@ router.post('/', async (req, res) => {
       bili_uid: biliUid,
       upload,
       date: new Date(),
-      email
+      email,
+      // bot异常 临时跳过验证
+      status: 1
     })
   )
   sqlLog(
     qq,
-    `申请白名单${JSON.stringify({
+    `申请白名单, bot异常 临时跳过验证 status为1,${JSON.stringify({
       qq,
       name,
       bili_username: biliUsername,
       bili_uid: biliUid,
       upload,
       date: new Date(),
-      email
+      email,
+      status: 1
     })}`,
     results.insertId
   )
